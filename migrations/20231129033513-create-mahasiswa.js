@@ -3,13 +3,9 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Mahasiswas', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
       nim: {
+        allowNull: false,
+        primaryKey: true,
         type: Sequelize.STRING
       },
       nama: {
@@ -22,6 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       token: {
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
@@ -31,9 +28,18 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      prodiId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'Prodis',
+            key: 'id'
+        }
       }
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Mahasiswas');
   }
