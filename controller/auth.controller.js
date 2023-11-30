@@ -4,26 +4,27 @@ const Bcrypt = require('bcrypt')
 const JWT = require('jsonwebtoken')
 
 const register = async (req, res) => {
-    const t = await db.sequelize.transaction()
+    
     try {
         // console.log(Object.keys(Mahasiswa.prototype))
-        const mahasiswa = await Mahasiswa.create({
-            nim: req.body.nim,
-            nama: req.body.nama,
-            angkatan: req.body.angkatan,
-            password: Bcrypt.hashSync(req.body.password, 10),
-        }, {transaction: t});
-
-        await mahasiswa.setProdi(req.body.prodiId, {transaction: t})
-
-        await t.commit();
-
-        return res.status(200).json({
-            message: "Registrasi mahasiswa",
-            mahasiswa,
+        const t = await db.sequelize.transaction(async (t) => {
+            const mahasiswa = await Mahasiswa.create({
+                nim: req.body.nim,
+                nama: req.body.nama,
+                angkatan: req.body.angkatan,
+                password: Bcrypt.hashSync(req.body.password, 10),
+            }, {transaction: t});
+    
+            await mahasiswa.setProdi(req.body.prodiId, {transaction: t})
+    
+            await t.commit();
+    
+            return res.status(200).json({
+                message: "Registrasi mahasiswa",
+                mahasiswa,
+            })
         })
     } catch (error) {
-        await t.rollback()
         return res.status(500).json({
             success: false,
             message: error.message
@@ -43,6 +44,14 @@ const login = async (req, res) => {
             })
         }
 
+        const isPasswordValid = Bcrypt.compareSync(req.body.password, mahasiswa.password)
+
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                message: "Password salah!"
+            })
+        }
+
         const token = JWT.sign({
             iss: 'jsonwebtoken',
             sub: nim,
@@ -52,9 +61,7 @@ const login = async (req, res) => {
             algorithm: "HS256"
         })
 
-        await mahasiswa.update({
-            token: token
-        })
+        await mahasiswa.update({ token: token })
 
         return res.status(200).json({
             message: "Login mahasiswa",
