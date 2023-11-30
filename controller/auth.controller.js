@@ -7,7 +7,7 @@ const register = async (req, res) => {
     
     try {
         // console.log(Object.keys(Mahasiswa.prototype))
-        const t = await db.sequelize.transaction(async (t) => {
+        await db.sequelize.transaction(async (t) => {
             const mahasiswa = await Mahasiswa.create({
                 nim: req.body.nim,
                 nama: req.body.nama,
@@ -20,7 +20,7 @@ const register = async (req, res) => {
             await t.commit();
     
             return res.status(200).json({
-                message: "Registrasi mahasiswa",
+                message: "Registrasi mahasiswa berhasil",
                 mahasiswa,
             })
         })
