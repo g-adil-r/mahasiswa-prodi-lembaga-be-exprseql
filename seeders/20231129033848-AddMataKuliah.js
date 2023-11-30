@@ -15,26 +15,31 @@ module.exports = {
 
     await queryInterface.bulkInsert('Matakuliahs', [
         {
+            id: 1,
             nama: 'Pemrograman Dasar',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 2,
             nama: 'Pemrograman Lanjut',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 3,
             nama: 'Algoritma dan Struktur Data',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 4,
             nama: 'Sistem Basis Data',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 5,
             nama: 'Jaringan Komputer Dasar',
             createdAt: new Date(),
             updatedAt: new Date(),

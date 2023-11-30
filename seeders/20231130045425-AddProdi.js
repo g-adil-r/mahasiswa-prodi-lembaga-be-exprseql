@@ -14,26 +14,31 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Prodis', [
         {
+            id: 1,
             nama: 'Teknologi Informasi',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 2,
             nama: 'Sistem Informasi',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 3,
             nama: 'Pendidikan Teknologi Informasi',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 4,
             nama: 'Teknik Informatika',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
+            id: 5,
             nama: 'Teknik Komputer',
             createdAt: new Date(),
             updatedAt: new Date(),
