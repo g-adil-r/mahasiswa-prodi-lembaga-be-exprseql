@@ -1,7 +1,8 @@
-const Mahasiswa = require('../models/mahasiswa')
+const { Mahasiswa } = require('../models')
 
 const getAllMahasiswa = async (req, res) => {
     try {
+        console.log(Mahasiswa)
         const mahasiswa = await Mahasiswa.findAll();
 
         res.status(200).json({
@@ -15,28 +16,6 @@ const getAllMahasiswa = async (req, res) => {
     }
 }
 
-const addNewMahasiswa = async (req, res) => {
-    try {
-        const mahasiswa = await Mahasiswa.create({
-            nim: req.body.nim,
-            nama: req.body.nama,
-            angkatan: req.body.angkatan,
-            password: req.body.password,
-            prodiId: req.body.prodiId
-        });
-
-        res.status(200).json({
-            message: "Membuat satu mahasiswa",
-            mahasiswa,
-        })
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        })
-    }
-}
-
 module.exports = {
     getAllMahasiswa,
-    addNewMahasiswa
 }

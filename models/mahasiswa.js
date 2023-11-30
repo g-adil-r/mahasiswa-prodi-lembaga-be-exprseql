@@ -11,11 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Prodi);
-      this.belongsToMany(models.Matakuliah)
+      this.belongsToMany(models.Matakuliah, {
+        through: 'mahasiswa_matakuliah',
+        as: 'mataKuliah'
+      })
     }
   }
   Mahasiswa.init({
-    nim: DataTypes.STRING,
+    nim: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+    },
     nama: DataTypes.STRING,
     angkatan: DataTypes.INTEGER,
     password: DataTypes.STRING,
