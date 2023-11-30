@@ -21,6 +21,7 @@ const getAllMahasiswa = async (req, res) => {
 
 const getMahasiswaByToken = async (req, res) => {
     return res.status(200).json({
+        message: "Mendapatkan mahasiswa dari token",
         mahasiswa: req.mahasiswa,
     });
 }
@@ -38,7 +39,7 @@ const getMahasiswaByNim = async (req, res) => {
         }
 
         return res.status(200).json({
-            message: "Mendapatkan mahasiswa dari nim"+nim,
+            message: "Mendapatkan mahasiswa dari nim "+nim,
             mahasiswa,
         })
     } catch (error) {
