@@ -12,30 +12,29 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-
-    await queryInterface.bulkInsert('Matakuliahs', [
+    await queryInterface.bulkInsert('Prodis', [
         {
-            nama: 'Pemrograman Dasar',
+            nama: 'Teknologi Informasi',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
-            nama: 'Pemrograman Lanjut',
+            nama: 'Sistem Informasi',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
-            nama: 'Algoritma dan Struktur Data',
+            nama: 'Pendidikan Teknologi Informasi',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
-            nama: 'Sistem Basis Data',
+            nama: 'Teknik Informatika',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
         {
-            nama: 'Jaringan Komputer Dasar',
+            nama: 'Teknik Komputer',
             createdAt: new Date(),
             updatedAt: new Date(),
         },
@@ -49,7 +48,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-
-    await queryInterface.bulkDelete('Matakuliahs')
+    await queryInterface.bulkDelete('Prodis');
   }
 };

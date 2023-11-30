@@ -22,6 +22,7 @@ const addNewMahasiswa = async (req, res) => {
             nama: req.body.nama,
             angkatan: req.body.angkatan,
             password: req.body.password,
+            prodiId: req.body.prodiId
         });
 
         res.status(200).json({
