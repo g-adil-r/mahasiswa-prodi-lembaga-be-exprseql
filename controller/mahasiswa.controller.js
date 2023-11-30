@@ -1,11 +1,11 @@
+const db = require('../models')
 const { 
     Mahasiswa,
     Matakuliah
-} = require('../models')
+} = db
 
 const getAllMahasiswa = async (req, res) => {
     try {
-        console.log(Mahasiswa)
         const mahasiswa = await Mahasiswa.findAll();
 
         return res.status(200).json({

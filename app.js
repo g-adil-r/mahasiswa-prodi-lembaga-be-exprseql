@@ -1,8 +1,10 @@
+require("dotenv").config()
 const express = require('express')
 const PORT = process.env.PORT || 8000
 const app = express()
 const route = require("./route/route")
 
+app.use(express.json());
 app.use("/", route.export())
 
 app.listen(PORT, () => {
