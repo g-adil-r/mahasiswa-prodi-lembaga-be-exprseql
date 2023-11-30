@@ -88,7 +88,8 @@ const addMataKuliah = async (req, res) => {
         await mahasiswa.addMatakuliah(matakuliah)
 
         return res.status(200).json({
-            message: "Menambah matakuliah dari mahasiswa"
+            message: "Menambah matakuliah dari mahasiswa",
+            mahasiswa: mahasiswa
         })
     } catch (error) {
         return res.status(500).json({
@@ -116,7 +117,7 @@ const removeMataKuliah = async (req, res) => {
             })
         }
 
-        await Mahasiswa.removeMatakuliah(matakuliah)
+        await mahasiswa.removeMatakuliah(matakuliah)
 
         return res.status(200).json({
             message: "Menghapus matakuliah dari mahasiswa"

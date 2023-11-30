@@ -4,10 +4,9 @@ const Bcrypt = require('bcrypt')
 const JWT = require('jsonwebtoken')
 
 const register = async (req, res) => {
+    const t = await db.sequelize.transaction()
     try {
         // console.log(Object.keys(Mahasiswa.prototype))
-        const t = await db.sequelize.transaction()
-
         const mahasiswa = await Mahasiswa.create({
             nim: req.body.nim,
             nama: req.body.nama,
@@ -24,7 +23,9 @@ const register = async (req, res) => {
             mahasiswa,
         })
     } catch (error) {
+        await t.rollback()
         return res.status(500).json({
+            success: false,
             message: error.message
         })
     }
