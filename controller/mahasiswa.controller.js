@@ -1,12 +1,18 @@
 const db = require('../models')
 const { 
     Mahasiswa,
-    Matakuliah
+    Matakuliah,
+    Prodi
 } = db
 
 const getAllMahasiswa = async (req, res) => {
     try {
-        const mahasiswa = await Mahasiswa.findAll();
+        const mahasiswa = await Mahasiswa.findAll({
+            include: [{
+                model: Prodi,
+                as: 'prodi'
+            }]
+        });
 
         return res.status(200).json({
             message: "Mendapatkan semua mahasiswa",
@@ -30,7 +36,18 @@ const getMahasiswaByNim = async (req, res) => {
     const nim = req.params.nim;
 
     try {
-        const mahasiswa = await Mahasiswa.findByPk(nim)
+        const mahasiswa = await Mahasiswa.findByPk(nim, {
+            include: [
+                {
+                    model: Prodi,
+                    as: 'prodi'
+                },
+                {
+                    model: Matakuliah,
+                    as: 'matakuliah'
+                }
+            ]
+        })
 
         if (!mahasiswa) {
             return res.status(404).json({
@@ -55,7 +72,7 @@ const addMataKuliah = async (req, res) => {
 
     try {
         const mahasiswa = await Mahasiswa.findByPk(nim)
-        const matakuliah = await Matakuliah.findByPk(nim)
+        const matakuliah = await Matakuliah.findByPk(mkid)
 
         if (!mahasiswa) {
             return res.status(404).json({
@@ -67,8 +84,8 @@ const addMataKuliah = async (req, res) => {
                 message: "Mata kuliah dengan ID "+mkid+" tidak ditemukan",
             })
         }
-
-        await Mahasiswa.addMataKuliah(matakuliah)
+        
+        await mahasiswa.addMatakuliah(matakuliah)
 
         return res.status(200).json({
             message: "Menambah matakuliah dari mahasiswa"
@@ -86,7 +103,7 @@ const removeMataKuliah = async (req, res) => {
 
     try {
         const mahasiswa = await Mahasiswa.findByPk(nim)
-        const matakuliah = await Matakuliah.findByPk(nim)
+        const matakuliah = await Matakuliah.findByPk(mkid)
 
         if (!mahasiswa) {
             return res.status(404).json({
@@ -99,7 +116,7 @@ const removeMataKuliah = async (req, res) => {
             })
         }
 
-        await Mahasiswa.removeMataKuliah(matakuliah)
+        await Mahasiswa.removeMatakuliah(matakuliah)
 
         return res.status(200).json({
             message: "Menghapus matakuliah dari mahasiswa"

@@ -19,7 +19,7 @@ root.group("/mahasiswa", mahasiswa => {
     mahasiswa.get("/profile", JWTMiddleware, mahasiswaController.getMahasiswaByToken)
     mahasiswa.get("/:nim", mahasiswaController.getMahasiswaByNim);
 
-    mahasiswa.group("/:nim/matakuliah", matakuliah => {
+    mahasiswa.group("/:nim/matakuliah/:mkid", matakuliah => {
         matakuliah.post("/", mahasiswaController.addMataKuliah);
         matakuliah.put("/", mahasiswaController.removeMataKuliah);
     })

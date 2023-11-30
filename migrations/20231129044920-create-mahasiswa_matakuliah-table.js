@@ -23,6 +23,14 @@ module.exports = {
                 model: 'Matakuliahs',
                 key: 'id',
             }
+        },
+        createdAt: {
+            allowNull: false,
+            type: Sequelize.DATE
+        },
+        updatedAt: {
+            allowNull: false,
+            type: Sequelize.DATE
         }
     })
   },
